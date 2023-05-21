@@ -84,9 +84,61 @@ namespace MyFirstApp.Controllers
             }
 
 
-            return new RedirectToActionResult("Index", "Store", new { }, true);
+            return RedirectToRoute(new  {controller = "Store",action="books" });
 
 
         }
+        [Route("bookstore/{bookid?}/{isloggedin?}")]
+        public IActionResult BookStore(int? bookid,  bool? isloggedin, Book book)
+        {
+            //the url should contain bookid
+            if (book.BookId.HasValue == false)
+            {
+
+                return BadRequest("need Book id is to view the book");
+            }
+            
+           
+
+            //book id is a valid
+            //int bookid = Convert.ToInt32(Request.Query["bookid"]);
+            if (bookid <= 0)
+            {
+
+                return BadRequest("Book id cannot be O or less than zero");
+            }
+            else if (bookid > 1000)
+            {
+
+                return NotFound("Book Not found");
+            }
+
+            //isloggedin is true?
+
+            //bool isloggedin = Convert.ToBoolean(Request.Query["isloggedin"]);
+            if (isloggedin == false)
+            {
+                return Unauthorized("User Not Authorized");
+            }
+
+
+            //return Content($"<h1>book = {bookid}</h1> <br> <h1>isloggedin = {isloggedin}</h1>", "text/html");
+            return Content(book.ToString());
+
+        }
+
+        [Route("Person")]
+        public IActionResult Person(Person person)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                string error = String.Join("\n",(ModelState.Values.SelectMany(x => x.Errors).Select(a => a.ErrorMessage)));
+                return BadRequest(error);
+            }
+
+            return new EmptyResult();
+        }
+
     }
 }

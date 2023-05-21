@@ -5,7 +5,7 @@ namespace MyFirstApp.Controllers
     public class StoreController : Controller
     {
         [Route("store/books")]
-        public IActionResult Index()
+        public IActionResult books()
         {
             return File("Adhar.pdf", "application/pdf");
         }
