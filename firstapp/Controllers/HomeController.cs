@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyFirstApp.CustomModelBinder;
 using MyFirstApp.Models;
 
 namespace MyFirstApp.Controllers
@@ -128,7 +129,7 @@ namespace MyFirstApp.Controllers
         }
 
         [Route("Person")]
-        public IActionResult Person(Person person)
+        public IActionResult Person ([FromForm] Person person, [FromHeader(Name ="User-Agent")] string user )
         {
 
             if (!ModelState.IsValid)
@@ -137,7 +138,7 @@ namespace MyFirstApp.Controllers
                 return BadRequest(error);
             }
 
-            return new EmptyResult();
+            return Content($"{user}"); 
         }
 
     }

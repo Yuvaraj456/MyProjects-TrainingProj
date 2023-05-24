@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using MyFirstApp.CustomValidators;
 using System.ComponentModel.DataAnnotations;
 
@@ -18,6 +19,11 @@ namespace MyFirstApp.Models
 
         public string? City { get; set; }
 
+        public List<string?> Tags { get; set; } = new List<string?>();
+
+
+        public int[]? PinCode { get; set; } 
+        
         public string? Region { get; set; }
         [ValidateNever]
         [EmailAddress(ErrorMessage ="Please enter valid {0}")]
@@ -25,9 +31,9 @@ namespace MyFirstApp.Models
 
         [Phone(ErrorMessage = "Please enter valid {0}")]
         public string? PhoneNumber { get; set;}
-
+        
         //[MinimumYearValidatorAttribute(2005, ErrorMessage = "Minimum Year required is above {0}")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [RegularExpression("^[0-9]{6}$",ErrorMessage ="Please enter valid {0}")]
         //[Range(100001,699999,ErrorMessage ="{0} range between {1} to {2}")]
@@ -45,9 +51,11 @@ namespace MyFirstApp.Models
         [Compare("Password", ErrorMessage="{0} cant match the {1}")]
         public string? ConfPassword { get; set; }
 
+      
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if(String.IsNullOrWhiteSpace(DateOfBirth.ToString()) && Age.HasValue == false)
+            
+            if (DateOfBirth.HasValue == false && Age.HasValue == false)
             {
                 yield return new ValidationResult("Please enter either Dateofbirth or Age", new[] {nameof(Age)});
             }
