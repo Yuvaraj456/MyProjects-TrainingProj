@@ -4,9 +4,10 @@ namespace MyFirstApp.Controllers
 {
     public class PracticeController : Controller
     {
+        [Route("Practice")]
         public IActionResult Index()
         {
-            return new ViewResult(){ ViewName= "Index" };
+            return View();
         }
     }
 }

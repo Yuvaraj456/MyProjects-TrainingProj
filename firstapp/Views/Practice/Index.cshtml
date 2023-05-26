@@ -1,0 +1,28 @@
+﻿@using MyFirstApp.Models
+
+@{
+    string? text = "Iam Yuvaraj Iam Learning Dotnet Core";
+
+    Employee employee = new Employee() { EmployeeName="Yuvaraj", EmpExperience=2, EmpSalary=20000};
+    
+}
+<!Doctype Html>
+
+<html>
+
+<head>
+
+    <title>UV universe</title>
+    <meta charset="utf-8" />
+
+</head>
+<body>
+    Welcome to the Universe
+    <h1>@text</h1>
+    <h2>@employee.EmployeeName</h2>
+    <h2>@employee.EmpSalary</h2>
+    <h3>@employee.EmpExperience</h3>
+      
+</body>
+
+</html>
