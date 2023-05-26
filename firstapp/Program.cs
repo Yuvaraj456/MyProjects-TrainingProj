@@ -9,13 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddTransient<CustomMiddleWare>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 builder.Services.AddControllers().AddXmlSerializerFormatters();
 var app = builder.Build();//will get instance of web application
 
 
 app.UseStaticFiles();
-app.UseRouting();
+//app.UseRouting();
 
 app.MapControllers();
 
