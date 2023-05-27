@@ -1,10 +1,27 @@
 ﻿@using MyFirstApp.Models
 
 @{
-    string? text = "Iam Yuvaraj Iam Learning Dotnet Core";
+    //string? text = "Iam Yuvaraj Iam Learning Dotnet Core";
 
-    Employee employee = new Employee() { EmployeeName="Yuvaraj", EmpExperience=2, EmpSalary=20000};
-    
+
+    //List<Employee>? emp = (List<Employee>?)ViewData["employee"];
+
+
+}
+@{
+    double? Age(DateTime? dateTime)
+    {
+        if (dateTime.HasValue==true)
+        {
+            return Math.Round((DateTime.Now - dateTime.Value).TotalDays/365.25);
+
+        }
+        return null;
+    }
+
+    //string alertMessage = $"<script>alert('{emp.Count} employees available now')</script>";
+
+  
 }
 <!Doctype Html>
 
@@ -14,15 +31,82 @@
 
     <title>UV universe</title>
     <meta charset="utf-8" />
-
+    <link href="~/StyleSheet.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-    Welcome to the Universe
-    <h1>@text</h1>
-    <h2>@employee.EmployeeName</h2>
-    <h2>@employee.EmpSalary</h2>
-    <h3>@employee.EmpExperience</h3>
+<div class="page-content">
+@*@Html.Raw(alertMessage)*@
+    <table style="border: 0.5px blue solid ;" border="1" class="box">
+        <tr>
+            <th>EmployeeName</th>
+            <th>EmpExperience</th>
+            <th>EmpSalary</th>
+            <th>DOB</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Active_id</th>
+            <th>Actions</th>
+        </tr>
+        <!--Razor-For-->
+       @* @for(int i=0;i<2;i++)
+        {
+            var employee = emp[i];
+        }*@
+
+            @foreach (Employee employee in ViewBag.employee)
+            {
+
+           // <text>hello</text> --> Static text(Literals)
+
+        <tr >
+          
+            <td>@employee.EmployeeName</td>
+            <td>@employee.EmpExperience</td>
+            <td>@employee.EmpSalary</td>           
+             <td>@employee.DOB?.ToString("dd/MM/yyyy")</td>
+                
+                    
+                <td>@Age(employee.DOB) years old</td>
+                <td>@employee.Gender</td>
+                <!--Razor If-->
+                @if (employee.Active_id == 0)
+                {                    
+                    <td style=" background-color:red;">
+                        @employee.Active_id
+                    </td>
+                }
+                else
+                {
+                    <td style="background-color:green;">
+                         @employee.Active_id
+                    </td>                   
+                }
+                    <td><a href="/Practice/Details/@employee.Id">Details</a></td>
+        </tr>
+       
+            
       
+
+   @* <!--Razor Switch-->
+        @switch (employee.Gender)
+    {
+        case "Male":
+            <h2>Happy Mens Day</h2>
+            break;
+
+        case "Female":
+            <h2>Happy Womens day</h2>
+            break;
+
+        default :
+            <h2>Undefined</h2>
+            break;
+    } *@ 
+  
+    
+    }
+    </table>
+    </div>
 </body>
 
 </html>

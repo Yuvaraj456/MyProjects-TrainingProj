@@ -1,0 +1,39 @@
+﻿@model MyFirstApp.Models.Employee
+
+<!Doctype Html>
+
+<html>
+    <head>
+        <title>Welcome</title>
+        <link href="~/StyleSheet.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+    <table class="table box page-content">
+            <tbody>
+            <tr>
+            <td>EmployeeName</td>
+            <td>@Model.EmployeeName</td>
+            </tr>
+            <tr>
+                <td>EmployeeSalary</td>
+                <td>@Model.EmpSalary</td>
+            </tr>
+            <tr>
+                <td>EmployeeGender</td>
+                <td>@Model.Gender</td>
+            </tr>
+            <tr>
+                <td>EmployeeExperience</td>
+                <td>@Model.EmpExperience</td>
+            </tr>
+            <tr>
+                <td>EmployeeDOB</td>
+                <td>@Model.DOB?.ToString("dd/MM/yyyy")</td>
+            </tr>
+            </tbody>
+
+        </table>
+        
+        <a href="/Practice/Index" >Return to home</a>
+    </body>
+</html>
