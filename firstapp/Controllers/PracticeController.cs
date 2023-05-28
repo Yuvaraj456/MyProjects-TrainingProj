@@ -51,6 +51,21 @@ namespace MyFirstApp.Controllers
 
             return View(employee);
         }
+
+        [Route("/Practice/joinmodel")]
+        public IActionResult MultipleModel()
+        {
+            Employee employee = new Employee() {  EmployeeName ="Siva", EmpExperience=1, EmpSalary=35000, Gender = "Male", DOB=Convert.ToDateTime("12-02-2002")};
+
+            Product product = new Product() { ProductName = "Rice", ProductDesc = "Well maintened and organic", Price = 820 };
+         
+
+            EmployeeAndProductWrapperModel? employeeAndProductWrapperModel = new 
+                EmployeeAndProductWrapperModel() {ProductData = product, EmployeeData=employee };
+            return View("joinModel", employeeAndProductWrapperModel);
+
+        }
+
     }
 
 
